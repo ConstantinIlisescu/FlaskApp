@@ -10,3 +10,11 @@ pip install flask
 
 # run server (add port to overide the error )
 flask run --port=5001
+
+use the flake8 and black linters
+
+Open problems tab
+ctrl+shift+M
+
+sort the imports 
+Shift+alt+O
