@@ -1,0 +1,12 @@
+# Create the virtual environment 
+python -m venv .venv
+
+# tell the editor which virtual env to use
+ctrl+shift+p -> select interpreter -> select the oneat ./ path wich is in ./.venv/Scripts/python.exe 
+Terminal needs to be restarted
+
+# Install the requirements
+pip install flask
+
+# run server (add port to overide the error )
+flask run --port=5001
