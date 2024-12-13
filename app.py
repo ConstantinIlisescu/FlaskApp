@@ -15,8 +15,22 @@ stores = [
 ]
 
 @app.get("/store")
-def get_store():
+def get_stores():
     return{"store":stores}
+
+@app.get("/store/<string:name>")
+def get_store(name):
+    for store in stores:
+        if store['name'] == name:
+            return store, 201
+    return {"message":"Store not found"}, 404
+
+@app.get("/store/<string:name>/item")
+def get_item_in_store(name):
+    for store in stores:
+        if store['name'] == name:
+            return {"items": store['items']}, 201
+    return {"message":"Store not found"}, 404
 
 @app.post("/store")
 def create_store():
