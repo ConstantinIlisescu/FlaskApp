@@ -8,13 +8,19 @@ Terminal needs to be restarted
 # Install the requirements
 pip install flask
 
-# run server (add port to overide the error )
-flask run --port=5001
+# use the flake8 and black linters
 
-use the flake8 and black linters
-
-Open problems tab
+# Open problems tab
 ctrl+shift+M
 
-sort the imports 
+# sort the imports 
 Shift+alt+O
+
+# use requirments.txt to include all the dependency packages needed for the app
+# to install them run:
+pip install -r requirements.txt
+# OR
+pip install <package_name>
+
+# run server (add port to overide the error )
+flask run --port=5001
