@@ -33,7 +33,7 @@ class StoreList(MethodView):
     def get(self):
         return{"store":list(stores.values())}
 
-     @blp.arguments(StoreSchema)
+    @blp.arguments(StoreSchema)
     def post(self, store_data):
         for store in stores.values():
             if store_data["name"] == store["name"]:
