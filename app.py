@@ -38,6 +38,14 @@ def create_store():
     stores[store_id] = store
     print(store)
     return store, 201
+
+@app.delete("/store/<string:store_id>")
+def delete_store(store_id):
+    try:
+        del stores[store_id]
+        return {"message":"Store deleted."}
+    except KeyError:
+        abort(404, message="Store not found.")
     
 
 # Items GET endpoints
@@ -51,6 +59,7 @@ def get_item(item_id):
         return items[item_id]
     except KeyError:
         abort(404, message="Item not found.")
+        
 
 @app.post("/item")
 def create_item():
@@ -77,6 +86,28 @@ def create_item():
     
     item_id = uuid.uuid4().hex
     item = {**item_data, "id": item_id}
-    item[item_id] = item
+    items[item_id] = item
     
     return item, 201
+
+@app.delete("/item/<string:item_id>")
+def delete_item(item_id):
+    try:
+        del items[item_id]
+        return {"message":"Item deleted."}
+    except KeyError:
+        abort(404, message="Item not found.")
+
+@app.put("/item/<string:item_id>")
+def update_item(item_id):
+    item_data = request.get_json()
+    if "price" not in item_data or "name" not in item_data:
+        abort(400, message="Bad request. Ensure 'price' and 'name' are included in the JSON payload.")
+
+    try:
+        item = items[item_id]
+        item |= item_data  # syntax to update an dictionary, the items from the item_data will replace the values from item or add them to item
+        
+        return item
+    except KeyError:
+        abort(404, message="Item not found")
